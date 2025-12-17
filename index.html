@@ -5,103 +5,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Beenklachten Netwerk Breda e.o.</title>
 
-  <!-- Hoofd-stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <!-- HEADER: logo + banner in gecentreerde container -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <!-- Vervang logo.png door de juiste bestandsnaam indien nodig -->
+        <img src="logo.png" alt="Beenklachten Netwerk logo" class="logo-img" />
+      </div>
 
-  <!-- BANNER (zoals Enkel/Voet: hele afbeelding zichtbaar) -->
-  <header class="hero">
-    <img
-      src="https://raw.githubusercontent.com/Pimvanballegooie/Beenklachten/120fd9812a273c75c69be6be246b73ebd2744904/Beenklachten%20banner%20(21%20x%202%20cm)%20(21%20x%203%20cm).png"
-      alt="Beenklachten Netwerk banner"
-      class="hero-img"
-    />
+      <div class="banner-block">
+        <img
+          src="https://raw.githubusercontent.com/Pimvanballegooie/Beenklachten/120fd9812a273c75c69be6be246b73ebd2744904/Beenklachten%20banner%20(21%20x%202%20cm)%20(21%20x%203%20cm).png"
+          alt="Beenklachten Netwerk banner"
+          class="banner-img"
+        />
+      </div>
+    </div>
   </header>
 
-  <!-- NAVIGATIE / BUTTONS BOVENIN -->
+  <!-- NAVIGATIE: pill-buttons zoals Enkel/Voet -->
   <nav class="topnav">
-    <a href="index.html" class="nav-btn primary">Home</a>
-    <a href="kaart.html" class="nav-btn">Regio kaart</a>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-pill nav-pill-active">
+        <span class="icon icon-home"></span>
+        <span>Home</span>
+      </a>
 
-    <div class="nav-group">
-      <a href="heup-bovenbeen.html" class="nav-btn">Heup &amp; Bovenbeen</a>
-      <a href="knie-onderbeen.html" class="nav-btn">Knie &amp; Onderbeen (VKB)</a>
-      <a href="enkel-voet.html" class="nav-btn">Enkel &amp; Voet</a>
-      <a href="brace-orthese.html" class="nav-btn">Brace / orthese benen</a>
-      <a href="glad-artrose.html" class="nav-btn">GLA:D artrose heup/knie</a>
+      <a href="protocollen.html" class="nav-pill">
+        <span class="icon icon-doc"></span>
+        <span>Protocollen</span>
+      </a>
+
+      <a href="kaart.html" class="nav-pill">
+        <span class="icon icon-location"></span>
+        <span>Locaties</span>
+      </a>
+
+      <a href="lid-worden.html" class="nav-pill nav-pill-cta">
+        <span class="icon icon-cta"></span>
+        <span>Locatie worden</span>
+      </a>
     </div>
-
-    <a href="lid-worden.html" class="nav-btn accent nav-right">Lid worden</a>
   </nav>
 
   <main class="page">
-    <!-- INTRO BLOK -->
-    <section class="card intro">
+    <!-- INTRODUCTIECARD (vergelijkbaar met Enkel/Voet-tekstblok) -->
+    <section class="card intro-card">
       <h1>Beenklachten Netwerk Breda e.o.</h1>
+
       <p>
-        Het Beenklachten Netwerk is een regionaal samenwerkingsverband van fysiotherapeuten,
-        orthopedisch specialisten, ergotherapeuten en andere zorgprofessionals. We richten ons op
-        klachten van heup, bovenbeen, knie, onderbeen, enkel en voet.
+        Het Beenklachten Netwerk Breda e.o. is een netwerk dat staat voor samenwerking in de regio
+        én hoogwaardige, eenduidige begeleiding bij klachten van heup, bovenbeen, knie, onderbeen,
+        enkel en voet.
       </p>
+
       <p>
-        Binnen het netwerk sluiten bestaande deelnetwerken – zoals het Enkel/Voet Netwerk en
-        GLA:D voor artrose – logisch op elkaar aan. Zo ontstaat een duidelijk en herkenbaar
-        zorgpad voor cliënten en verwijzers in de regio Breda e.o.
+        Transparantie, samenwerking, duidelijke zorgpaden en aandacht voor gezondheidsvaardigheden
+        zorgen voor betere begeleiding van cliënten. Binnen het netwerk sluiten bestaande
+        deelnetwerken – zoals het Enkel Voet Netwerk en GLA:D – logisch op elkaar aan.
       </p>
+
+      <p>
+        De informatie en protocollen zijn beschikbaar per deelgebied:
+      </p>
+
+      <div class="chip-row">
+        <span class="chip">Heup &amp; Bovenbeen</span>
+        <span class="chip">Knie &amp; Onderbeen (VKB)</span>
+        <span class="chip">Enkel &amp; Voet</span>
+      </div>
+
+      <a href="kaart.html" class="primary-btn">
+        Direct naar deelnemende locaties
+      </a>
     </section>
 
-    <!-- TEGELS KLACHTENGEBIEDEN -->
+    <!-- TEGELS DEELGEBIEDEN -->
     <section class="tiles">
       <article class="card tile">
         <h2>Heup &amp; Bovenbeen</h2>
-        <p>Netwerk voor heupklachten, overbelasting en (postoperatieve) revalidatie.</p>
-        <a href="heup-bovenbeen.html" class="btn">Meer over Heup &amp; Bovenbeen</a>
+        <p>
+          Netwerk van praktijken gespecialiseerd in heup- en bovenbeenklachten, overbelasting
+          en (postoperatieve) revalidatie.
+        </p>
+        <a href="heup-bovenbeen.html" class="btn">
+          Meer over Heup &amp; Bovenbeen
+        </a>
       </article>
 
       <article class="card tile">
         <h2>Knie &amp; Onderbeen (VKB)</h2>
-        <p>VKB-trajecten, knie-artrose en sportrevalidatie met duidelijke afspraken.</p>
-        <a href="knie-onderbeen.html" class="btn">Meer over Knie &amp; Onderbeen</a>
+        <p>
+          Gestructureerd zorgpad voor voorste kruisbandletsel, knie-artrose en andere
+          knie-/onderbeenklachten.
+        </p>
+        <a href="knie-onderbeen.html" class="btn">
+          Meer over Knie &amp; Onderbeen
+        </a>
       </article>
 
       <article class="card tile">
         <h2>Enkel &amp; Voet</h2>
-        <p>Maak gebruik van het bestaande gespecialiseerd netwerk voor enkel- en voetklachten.</p>
-        <a href="https://pimvanballegooie.github.io/EnkelVoetNetwerk/" class="btn">
-          Naar Enkel/Voet Netwerk
+        <p>
+          Voor enkel- en voetklachten is er een uitgebreid deelnetwerk met duidelijke afspraken
+          tussen ziekenhuis en eerstelijns zorg.
+        </p>
+        <a
+          href="https://pimvanballegooie.github.io/EnkelVoetNetwerk/"
+          class="btn"
+        >
+          Naar Enkel Voet Netwerk
         </a>
       </article>
     </section>
 
-    <!-- DEELNETWERKEN / PROGRAMMA'S -->
+    <!-- TEGELS OVERIGE THEMA'S -->
     <section class="tiles">
       <article class="card tile">
         <h2>Brace / orthese benen</h2>
-        <p>Overzicht van samenwerkingspartners voor het aanmeten van braces en orthesen.</p>
-        <a href="brace-orthese.html" class="btn">Meer over braces &amp; orthesen</a>
+        <p>
+          Overzicht van samenwerkingspartners voor het aanmeten van braces en orthesen voor
+          heup, knie, onderbeen, enkel en voet.
+        </p>
+        <a href="brace-orthese.html" class="btn">
+          Meer over braces &amp; orthesen
+        </a>
       </article>
 
       <article class="card tile">
         <h2>GLA:D – artrose heup/knie</h2>
-        <p>Regionale samenwerking rondom het GLA:D-programma voor heup- en knieartrose.</p>
-        <a href="glad-artrose.html" class="btn">Meer over GLA:D</a>
+        <p>
+          Regionale samenwerking rondom het GLA:D-programma voor mensen met heup- of
+          knieartrose.
+        </p>
+        <a href="glad-artrose.html" class="btn">
+          Meer over GLA:D
+        </a>
       </article>
     </section>
 
-    <!-- DEELNEMENDE PRAKTIJKEN -->
-    <section class="card practices">
+    <!-- DEELNEMENDE PRAKTIJKEN (ONDER DE TEGELS) -->
+    <section class="card practices-card">
       <h2>Deelnemende praktijken</h2>
       <p>
         Hieronder volgt een overzicht van praktijken die deelnemen aan het Beenklachten Netwerk.
-        Deze lijst kun je zelf aanvullen of aanpassen.
+        Deze lijst kun je aanvullen of koppelen aan de kaartpagina.
       </p>
 
       <ul class="practice-list">
-        <li>Voorbeeldpraktijk 1 – plaats</li>
-        <li>Voorbeeldpraktijk 2 – plaats</li>
-        <li>Voorbeeldpraktijk 3 – plaats</li>
+        <li>Voorbeeldpraktijk 1 – Plaats</li>
+        <li>Voorbeeldpraktijk 2 – Plaats</li>
+        <li>Voorbeeldpraktijk 3 – Plaats</li>
       </ul>
     </section>
   </main>
