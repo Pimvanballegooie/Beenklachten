@@ -1,11 +1,13 @@
 :root {
-  --color-primary: #6A8E79;
-  --color-accent: #A8C3A4;
-  --color-bg: #E7EFEA;
+  --color-primary: #6A8E79;   /* hoofdkleur */
+  --color-accent: #A8C3A4;    /* lichtgroen accent */
+  --color-bg: #E7EFEA;        /* zachte mint achtergrond */
   --color-card: #ffffff;
   --color-text: #2F3E36;
-  --shadow-soft: 0 3px 6px rgba(0,0,0,0.12);
+  --color-muted: #6f7c75;
+
   --radius-lg: 16px;
+  --shadow-soft: 0 3px 6px rgba(0, 0, 0, 0.12);
 }
 
 /* BASIS */
@@ -23,145 +25,138 @@ body {
   line-height: 1.6;
 }
 
-/* HERO */
+/* BANNER */
 .hero {
-  position: relative;
   width: 100%;
-  height: 260px;
-  overflow: hidden;
+  border-bottom: 2px solid #000; /* zoals op je banner-afbeelding */
 }
 
 .hero-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;      /* hele png zichtbaar */
+  display: block;
 }
 
-.hero-overlay {
-  position: absolute;
-  left: 40px;
-  bottom: 20px;
-  background: rgba(0,0,0,0.35);
-  color: #fff;
-  padding: 14px 22px;
-  border-radius: 12px;
-  max-width: 520px;
-}
-
-.hero-overlay h1 {
-  margin: 0 0 6px;
-  font-size: 1.8rem;
-}
-
-/* NAVIGATIE */
+/* NAVIGATIE - BUTTON-STYLE */
 .topnav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  background: var(--color-primary);
-}
-
-.topnav a,
-.dropbtn {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: transparent;
-  cursor: pointer;
-}
-
-.topnav .brand {
-  font-weight: 700;
-}
-
-.topnav .right {
-  margin-left: auto;
-  background: rgba(255,255,255,0.1);
-}
-
-/* DROPDOWN */
-.dropdown {
-  position: relative;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  background: #fff;
-  min-width: 210px;
-  padding: 6px 0;
-  border-radius: 12px;
-  box-shadow: var(--shadow-soft);
-  z-index: 10;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown-content a {
-  display: block;
-  padding: 8px 14px;
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.dropdown-content a:hover {
+  padding: 10px 16px;
   background: var(--color-bg);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-/* MAIN */
-main {
-  max-width: 1040px;
-  margin: auto;
-  padding: 32px 16px 60px;
+.nav-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.intro {
+.nav-btn {
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  padding: 6px 14px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.nav-btn.primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.nav-btn.accent {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.nav-btn:hover {
+  filter: brightness(0.95);
+}
+
+.nav-right {
+  margin-left: auto;
+}
+
+/* PAGINA-LAYOUT */
+.page {
+  max-width: 1100px;
+  margin: 24px auto 60px;
+  padding: 0 16px;
+}
+
+/* CARDS */
+.card {
   background: var(--color-card);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  padding: 22px;
+  padding: 22px 22px 20px;
+  margin-bottom: 20px;
 }
 
-/* TILES */
+.intro h1 {
+  margin-top: 0;
+}
+
+/* TILES / TEGELS */
 .tiles {
-  margin-top: 32px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-.tile {
-  padding: 20px;
-  background: var(--color-card);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+.tile h2 {
+  margin-top: 0;
 }
 
+/* BUTTONS IN CONTENT */
 .btn {
   display: inline-block;
   margin-top: 10px;
-  padding: 8px 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
   background: var(--color-primary);
   color: #fff;
   text-decoration: none;
-  border-radius: 999px;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .btn:hover {
   background: #587864;
 }
 
+/* PRAKTIJKENLIJST */
+.practices h2 {
+  margin-top: 0;
+}
+
+.practice-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
 /* FOOTER */
-footer {
+.footer {
   text-align: center;
-  padding: 24px;
+  padding: 24px 16px 30px;
   background: var(--color-primary);
   color: #fff;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 720px) {
+  .nav-right {
+    margin-left: 0;
+  }
 }
