@@ -1,6 +1,6 @@
 // script.js
 // - dropdown gedrag voor 'Protocollen'
-// - Leaflet kaart + locatielijst (index.html) en herbruikbaar voor locaties.html
+// - Leaflet kaart + locatielijst (index.html)
 
 const locations = [
   // Vervang dit door echte locaties (naam, adres, plaats, lat, lng)
@@ -61,7 +61,9 @@ function setupMapAndList(){
 
   locations.forEach((loc) => {
     const marker = L.marker([loc.lat, loc.lng]).addTo(map);
-    marker.bindPopup(`<strong>${escapeHtml(loc.name)}</strong><br>${escapeHtml(loc.address)}, ${escapeHtml(loc.city)}`);
+    marker.bindPopup(
+      `<strong>${escapeHtml(loc.name)}</strong><br>${escapeHtml(loc.address)}, ${escapeHtml(loc.city)}`
+    );
     bounds.push([loc.lat, loc.lng]);
     markers.push({ marker, loc });
   });
