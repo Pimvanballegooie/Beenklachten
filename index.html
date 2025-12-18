@@ -6,168 +6,109 @@
   <title>Beenklachten Netwerk Breda e.o.</title>
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Leaflet (voor kaartje op homepage) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
-  <!-- HEADER: logo + banner in gecentreerde container -->
   <header class="site-header">
-    <div class="header-inner">
-      <div class="logo-block">
-        <!-- PAS DE BESTANDSNAAM AAN ALS JE LOGO ANDERS HEET -->
-        <img src="logo.png" alt="Beenklachten Netwerk logo" class="logo-img" />
-      </div>
+    <div class="header-shell">
+      <a class="brand" href="index.html" aria-label="Home">
+        <img src="logo.png" alt="Beenklachten Netwerk" class="brand-logo" />
+      </a>
 
-      <div class="banner-block">
+      <div class="banner-shell" role="img" aria-label="Banner">
         <img
-          src="https://raw.githubusercontent.com/Pimvanballegooie/Beenklachten/120fd9812a273c75c69be6be246b73ebd2744904/Beenklachten%20banner%20(21%20x%202%20cm)%20(21%20x%203%20cm).png"
+          src="Beenklachten%20banner%20(21%20x%202%20cm)%20(21%20x%203%20cm).png"
           alt="Beenklachten Netwerk banner"
           class="banner-img"
         />
       </div>
     </div>
-  </header>
 
-  <!-- NAVIGATIE: pill-buttons -->
-  <nav class="topnav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-pill nav-pill-active">
-        <span class="icon icon-home"></span>
+    <nav class="nav-shell" aria-label="Hoofdnavigatie">
+      <a class="pill is-active" href="index.html">
+        <span class="pill-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+            <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z" fill="currentColor"></path>
+          </svg>
+        </span>
         <span>Home</span>
       </a>
 
-      <a href="protocollen.html" class="nav-pill">
-        <span class="icon icon-doc"></span>
-        <span>Protocollen</span>
-      </a>
+      <div class="pill pill-dropdown" data-dropdown>
+        <button class="pill-btn" type="button" aria-haspopup="true" aria-expanded="false">
+          <span class="pill-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+              <path d="M6 2h8l4 4v16H6V2zm8 1.5V7h3.5L14 3.5zM8 10h8v2H8v-2zm0 4h8v2H8v-2zm0 4h6v2H8v-2z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span>Protocollen</span>
+          <span class="pill-caret" aria-hidden="true"></span>
+        </button>
 
-      <a href="kaart.html" class="nav-pill">
-        <span class="icon icon-location"></span>
-        <span>Locaties</span>
-      </a>
-
-      <a href="lid-worden.html" class="nav-pill nav-pill-cta">
-        <span class="icon icon-cta"></span>
-        <span>Locatie worden</span>
-      </a>
-    </div>
-  </nav>
-
-  <main class="page">
-    <!-- INTRODUCTIECARD -->
-    <section class="card intro-card">
-      <h1>Beenklachten Netwerk Breda e.o.</h1>
-
-      <p>
-        Het Beenklachten Netwerk Breda e.o. is een netwerk dat staat voor samenwerking in de regio
-        én hoogwaardige, eenduidige begeleiding bij klachten van heup, bovenbeen, knie, onderbeen,
-        enkel en voet.
-      </p>
-
-      <p>
-        Transparantie, samenwerking, duidelijke zorgpaden en aandacht voor gezondheidsvaardigheden
-        zorgen voor betere begeleiding van cliënten. Binnen het netwerk sluiten bestaande
-        deelnetwerken – zoals het Enkel Voet Netwerk en GLA:D – logisch op elkaar aan.
-      </p>
-
-      <p>
-        De informatie en protocollen zijn beschikbaar per deelgebied:
-      </p>
-
-      <div class="chip-row">
-        <span class="chip">Heup &amp; Bovenbeen</span>
-        <span class="chip">Knie &amp; Onderbeen (VKB)</span>
-        <span class="chip">Enkel &amp; Voet</span>
+        <div class="dropdown" role="menu" aria-label="Protocollen categorieën">
+          <a role="menuitem" href="protocollen.html#heup-bovenbeen">Heup &amp; Bovenbeen</a>
+          <a role="menuitem" href="protocollen.html#knie-onderbeen">Knie &amp; Onderbeen</a>
+          <a role="menuitem" href="protocollen.html#enkel-voet">Enkel &amp; Voet</a>
+          <a role="menuitem" href="protocollen.html#glad">GLA:D artrose knie en heup</a>
+          <a role="menuitem" href="protocollen.html#brace-orthese">Brace &amp; Orthese</a>
+        </div>
       </div>
 
-      <a href="kaart.html" class="primary-btn">
-        Direct naar deelnemende locaties
+      <a class="pill" href="locaties.html">
+        <span class="pill-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+            <path d="M12 2c-3.3 0-6 2.7-6 6 0 4.6 6 14 6 14s6-9.4 6-14c0-3.3-2.7-6-6-6zm0 8.2c-1.2 0-2.2-1-2.2-2.2S10.8 5.8 12 5.8s2.2 1 2.2 2.2S13.2 10.2 12 10.2z" fill="currentColor"></path>
+          </svg>
+        </span>
+        <span>Map</span>
       </a>
-    </section>
 
-    <!-- TEGELS DEELGEBIEDEN -->
-    <section class="tiles">
-      <article class="card tile">
-        <h2>Heup &amp; Bovenbeen</h2>
-        <p>
-          Netwerk van praktijken gespecialiseerd in heup- en bovenbeenklachten, overbelasting
-          en (postoperatieve) revalidatie.
-        </p>
-        <a href="heup-bovenbeen.html" class="btn">
-          Meer over Heup &amp; Bovenbeen
-        </a>
-      </article>
+      <a class="pill pill-cta" href="locatie-worden.html">Locatie worden</a>
+    </nav>
+  </header>
 
-      <article class="card tile">
-        <h2>Knie &amp; Onderbeen (VKB)</h2>
-        <p>
-          Gestructureerd zorgpad voor voorste kruisbandletsel, knie-artrose en andere
-          knie-/onderbeenklachten.
-        </p>
-        <a href="knie-onderbeen.html" class="btn">
-          Meer over Knie &amp; Onderbeen
-        </a>
-      </article>
-
-      <article class="card tile">
-        <h2>Enkel &amp; Voet</h2>
-        <p>
-          Voor enkel- en voetklachten is er een uitgebreid deelnetwerk met duidelijke afspraken
-          tussen ziekenhuis en eerstelijns zorg.
-        </p>
-        <a
-          href="https://pimvanballegooie.github.io/EnkelVoetNetwerk/"
-          class="btn"
-        >
-          Naar Enkel Voet Netwerk
-        </a>
-      </article>
-    </section>
-
-    <!-- TEGELS OVERIGE THEMA'S -->
-    <section class="tiles">
-      <article class="card tile">
-        <h2>Brace / orthese benen</h2>
-        <p>
-          Overzicht van samenwerkingspartners voor het aanmeten van braces en orthesen voor
-          heup, knie, onderbeen, enkel en voet.
-        </p>
-        <a href="brace-orthese.html" class="btn">
-          Meer over braces &amp; orthesen
-        </a>
-      </article>
-
-      <article class="card tile">
-        <h2>GLA:D – artrose heup/knie</h2>
-        <p>
-          Regionale samenwerking rondom het GLA:D-programma voor mensen met heup- of
-          knieartrose.
-        </p>
-        <a href="glad-artrose.html" class="btn">
-          Meer over GLA:D
-        </a>
-      </article>
-    </section>
-
-    <!-- DEELNEMENDE PRAKTIJKEN -->
-    <section class="card practices-card">
-      <h2>Deelnemende praktijken</h2>
+  <main class="page-shell">
+    <section class="card">
+      <h1>Beenklachten Netwerk Breda e.o.</h1>
       <p>
-        Hieronder volgt een overzicht van praktijken die deelnemen aan het Beenklachten Netwerk.
-        Deze lijst kun je aanvullen of koppelen aan de kaartpagina.
+        Het Beenklachten Netwerk Breda e.o. is een netwerk dat staat voor samenwerking in de regio en
+        hoogwaardige, eenduidige begeleiding bij klachten van heup, bovenbeen, knie, onderbeen, enkel en voet.
+      </p>
+      <p>
+        Transparantie, samenwerking, duidelijke zorgpaden en aandacht voor gezondheidsvaardigheden zorgen voor betere
+        begeleiding van cliënten.
       </p>
 
-      <ul class="practice-list">
-        <li>Voorbeeldpraktijk 1 – Plaats</li>
-        <li>Voorbeeldpraktijk 2 – Plaats</li>
-        <li>Voorbeeldpraktijk 3 – Plaats</li>
-      </ul>
+      <div class="actions">
+        <a class="btn" href="locaties.html">Direct naar deelnemende locaties</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Locaties</h2>
+      <p class="muted">Kaart met deelnemende locaties (alleen locaties, geen disciplines).</p>
+
+      <div class="map-grid">
+        <div id="map" class="map"></div>
+        <div class="location-list" id="locationList" aria-label="Locatielijst"></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-ghost" href="locaties.html">Open volledige kaart</a>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    Beenklachten Netwerk Breda e.o. © 2025
+    <div class="footer-shell">
+      <span>Beenklachten Netwerk Breda e.o.</span>
+    </div>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
