@@ -1,5 +1,3 @@
-/* style.css — volledige herschreven versie (EVN-stijl, fixed topbar, uitlijning, protocollen-tegels, kaart) */
-
 :root{
   --bg: #E7EFEA;
   --surface: #ffffff;
@@ -20,9 +18,9 @@
   --container: 1100px;
   --gutter: 18px;
 
-  /* Hoogte-compensatie voor fixed topbar (desktop en mobiel) */
-  --topbar-offset: 240px;
-  --topbar-offset-mobile: 250px;
+  /* Hoogte-compensatie voor fixed topbar */
+  --topbar-offset: 210px;
+  --topbar-offset-mobile: 235px;
 }
 
 *{ box-sizing: border-box; }
@@ -38,29 +36,36 @@ body{
 a{ color: inherit; }
 img{ max-width: 100%; height: auto; display: block; }
 
-/* Topbar (full width, fixed) */
+/* =========================
+   EVN-achtige FIXED TOPBAR
+   ========================= */
 .site-header{
   padding: 0;
 }
 
-/* Full-width balk, inhoud blijft binnen container uitgelijnd */
+/* full-width WITTE balk */
 .topbar{
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 200;
+  z-index: 500;
 
-  background: var(--bg);
-  border-bottom: 1px solid rgba(0,0,0,.06);
+  background: #ffffff;                         /* wit zoals EVN */
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 8px 22px rgba(0,0,0,.06);
 
-  padding: 18px 0 12px;
+  padding: 16px 0 12px;
+}
+
+/* Inhoud in balk uitgelijnd met cards */
+.header-shell,
+.nav-shell{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
 /* Header grid: logo + banner */
 .header-shell{
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 18px;
@@ -78,58 +83,56 @@ img{ max-width: 100%; height: auto; display: block; }
   width: 160px;
 }
 
-/* Banner vlak */
+/* Banner kaartje in de witte balk (subtiel, zoals EVN) */
 .banner-shell{
-  background: var(--surface);
+  background: #ffffff;
   border-radius: var(--radius-md);
   padding: 8px;
-  box-shadow: var(--shadow-soft);
+
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
 }
 
-/* Banner altijd volledig zichtbaar */
 .banner-img{
   width: 100%;
-  height: 140px;
+  height: 130px;
   border-radius: var(--radius-sm);
 
-  object-fit: contain;
+  object-fit: contain;          /* volledig zichtbaar */
   object-position: center;
-  background: #fff;
+  background: #ffffff;
 }
 
-/* Nav (pills) */
+/* Nav pills in de balk */
 .nav-shell{
-  max-width: var(--container);
-  margin: 12px auto 0;
-  padding: 0 var(--gutter);
-
+  margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
 }
 
-/* Pill link */
+/* Pills */
 .pill{
   display: inline-flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
 
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(0,0,0,.06);
+  background: rgba(255,255,255,.95);          /* in witte balk */
+  border: 1px solid rgba(0,0,0,.10);
   border-radius: var(--radius-pill);
   padding: 10px 16px;
 
-  box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
 }
 
 .pill:hover{
-  background: rgba(255,255,255,.85);
+  background: #ffffff;
 }
 
 .pill.is-active{
-  background: rgba(255,255,255,.92);
+  background: #ffffff;
 }
 
 .pill-ico{
@@ -138,7 +141,7 @@ img{ max-width: 100%; height: auto; display: block; }
   align-items: center;
 }
 
-/* CTA pill */
+/* CTA */
 .pill-cta{
   background: var(--primary);
   color: #fff;
@@ -166,14 +169,14 @@ img{ max-width: 100%; height: auto; display: block; }
   color: var(--text);
   cursor: pointer;
 
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(0,0,0,.06);
+  background: rgba(255,255,255,.95);
+  border: 1px solid rgba(0,0,0,.10);
   border-radius: var(--radius-pill);
   padding: 10px 16px;
 }
 
 .pill-btn:hover{
-  background: rgba(255,255,255,.85);
+  background: #ffffff;
 }
 
 .pill-caret{
@@ -186,6 +189,7 @@ img{ max-width: 100%; height: auto; display: block; }
   margin-left: 2px;
 }
 
+/* Dropdown menu */
 .dropdown{
   position: absolute;
   top: calc(100% + 8px);
@@ -193,13 +197,13 @@ img{ max-width: 100%; height: auto; display: block; }
   min-width: 320px;
   padding: 8px;
 
-  background: var(--surface);
-  border: 1px solid rgba(0,0,0,.06);
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.10);
   border-radius: 14px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 16px 34px rgba(0,0,0,.14);
 
   display: none;
-  z-index: 250;
+  z-index: 600;
 }
 
 .pill-dropdown.is-open .dropdown{
@@ -218,7 +222,9 @@ img{ max-width: 100%; height: auto; display: block; }
   background: rgba(106,142,121,.12);
 }
 
-/* Page layout */
+/* =========================
+   PAGE LAYOUT
+   ========================= */
 .page-shell{
   max-width: var(--container);
   margin: 0 auto 40px;
@@ -261,7 +267,7 @@ p{
   color: var(--muted);
 }
 
-/* Buttons (in content) */
+/* Buttons in content */
 .actions{
   margin-top: 14px;
   display: flex;
@@ -390,12 +396,10 @@ p{
 
 /* Responsive */
 @media (max-width: 880px){
-  /* Topbar blijft full width */
   .topbar{
     padding: 14px 0 10px;
   }
 
-  /* Header naar 1 kolom (logo boven banner) */
   .header-shell{
     grid-template-columns: 1fr;
     align-items: start;
