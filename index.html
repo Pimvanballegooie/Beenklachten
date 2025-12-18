@@ -12,28 +12,65 @@
 </head>
 
 <body>
-<header class="site-header">
-  <div class="topbar">
-    <div class="header-shell">
-      <a class="brand" href="index.html" aria-label="Home">
-        <img src="logo.png" alt="Beenklachten Netwerk" class="brand-logo" />
-      </a>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="header-shell">
+        <a class="brand" href="index.html" aria-label="Home">
+          <img src="logo.png" alt="Beenklachten Netwerk" class="brand-logo" />
+        </a>
 
-      <div class="banner-shell" role="img" aria-label="Banner">
-        <img
-          src="Beenklachten%20banner%20(21%20x%202%20cm)%20(21%20x%203%20cm).png"
-          alt="Beenklachten Netwerk banner"
-          class="banner-img"
-        />
+        <div class="banner-shell" role="img" aria-label="Banner">
+          <img
+            src="Beenklachten%20banner%20(21%20x%202%20cm)%20(21%20x%203%20cm).png"
+            alt="Beenklachten Netwerk banner"
+            class="banner-img"
+          />
+        </div>
       </div>
-    </div>
 
-    <nav class="nav-shell" aria-label="Hoofdnavigatie">
-      <!-- laat jouw pills hier exact staan zoals je ze nu hebt -->
-      <!-- Home / Protocollen dropdown / Map / Locatie worden -->
-    </nav>
-  </div>
-</header>
+      <nav class="nav-shell" aria-label="Hoofdnavigatie">
+        <a class="pill is-active" href="index.html">
+          <span class="pill-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+              <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span>Home</span>
+        </a>
+
+        <div class="pill pill-dropdown" data-dropdown>
+          <button class="pill-btn" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="pill-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+                <path d="M6 2h8l4 4v16H6V2zm8 1.5V7h3.5L14 3.5zM8 10h8v2H8v-2zm0 4h8v2H8v-2zm0 4h6v2H8v-2z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <span>Protocollen</span>
+            <span class="pill-caret" aria-hidden="true"></span>
+          </button>
+
+          <div class="dropdown" role="menu" aria-label="Protocollen categorieën">
+            <a role="menuitem" href="protocollen.html#heup-bovenbeen">Heup &amp; Bovenbeen</a>
+            <a role="menuitem" href="protocollen.html#knie-onderbeen">Knie &amp; Onderbeen</a>
+            <a role="menuitem" href="https://pimvanballegooie.github.io/EnkelVoetNetwerk/">Enkel &amp; Voet</a>
+            <a role="menuitem" href="protocollen.html#glad">GLA:D artrose knie en heup</a>
+            <a role="menuitem" href="protocollen.html#brace-orthese">Brace &amp; Orthese</a>
+          </div>
+        </div>
+
+        <a class="pill" href="locaties.html">
+          <span class="pill-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" focusable="false" aria-hidden="true">
+              <path d="M12 2c-3.3 0-6 2.7-6 6 0 4.6 6 14 6 14s6-9.4 6-14c0-3.3-2.7-6-6-6zm0 8.2c-1.2 0-2.2-1-2.2-2.2S10.8 5.8 12 5.8s2.2 1 2.2 2.2S13.2 10.2 12 10.2z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span>Map</span>
+        </a>
+
+        <a class="pill pill-cta" href="locatie-worden.html">Locatie worden</a>
+      </nav>
+    </div>
+  </header>
 
   <main class="page-shell">
     <!-- Intro -->
@@ -53,38 +90,38 @@
       </div>
     </section>
 
-    <!-- Protocollen blok (nieuw) -->
+    <!-- Protocollen tegels -->
     <section class="card">
-  <h2>Protocollen</h2>
-  <p class="muted">Kies een categorie om direct naar de protocollen te gaan.</p>
+      <h2>Protocollen</h2>
+      <p class="muted">Kies een categorie om direct naar de protocollen te gaan.</p>
 
-  <div class="protocol-grid">
-    <a class="protocol-tile" href="protocollen.html#heup-bovenbeen">
-      <div class="protocol-title">Heup &amp; Bovenbeen</div>
-      <div class="protocol-meta">Heup, lies en bovenbeen.</div>
-    </a>
+      <div class="protocol-grid">
+        <a class="protocol-tile" href="protocollen.html#heup-bovenbeen">
+          <div class="protocol-title">Heup &amp; Bovenbeen</div>
+          <div class="protocol-meta">Heup, lies en bovenbeen.</div>
+        </a>
 
-    <a class="protocol-tile" href="protocollen.html#knie-onderbeen">
-      <div class="protocol-title">Knie &amp; Onderbeen</div>
-      <div class="protocol-meta">Knie, kuit en scheen.</div>
-    </a>
+        <a class="protocol-tile" href="protocollen.html#knie-onderbeen">
+          <div class="protocol-title">Knie &amp; Onderbeen</div>
+          <div class="protocol-meta">Knie, kuit en scheen.</div>
+        </a>
 
-    <a class="protocol-tile" href="https://pimvanballegooie.github.io/EnkelVoetNetwerk/">
-      <div class="protocol-title">Enkel &amp; Voet</div>
-      <div class="protocol-meta">Enkel, voet en pezen.</div>
-    </a>
+        <a class="protocol-tile" href="https://pimvanballegooie.github.io/EnkelVoetNetwerk/">
+          <div class="protocol-title">Enkel &amp; Voet</div>
+          <div class="protocol-meta">Enkel, voet en pezen.</div>
+        </a>
 
-    <a class="protocol-tile" href="protocollen.html#glad">
-      <div class="protocol-title">GLA:D artrose knie en heup</div>
-      <div class="protocol-meta">Programma en uitvoering.</div>
-    </a>
+        <a class="protocol-tile" href="protocollen.html#glad">
+          <div class="protocol-title">GLA:D artrose knie en heup</div>
+          <div class="protocol-meta">Programma en uitvoering.</div>
+        </a>
 
-    <a class="protocol-tile" href="protocollen.html#brace-orthese">
-      <div class="protocol-title">Brace &amp; Orthese</div>
-      <div class="protocol-meta">Indicaties en keuze.</div>
-    </a>
-  </div>
-</section>
+        <a class="protocol-tile" href="protocollen.html#brace-orthese">
+          <div class="protocol-title">Brace &amp; Orthese</div>
+          <div class="protocol-meta">Indicaties en keuze.</div>
+        </a>
+      </div>
+    </section>
 
     <!-- Kaart -->
     <section class="card">
