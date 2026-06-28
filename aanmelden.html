@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aanmelden – Beenklachten Netwerk</title>
+  <meta name="description" content="Meld uw praktijk of therapeuten aan bij het Beenklachten Netwerk. Zo werkt het." />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-300.woff2') format('woff2');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-regular.woff2') format('woff2');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-500.woff2') format('woff2');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-600.woff2') format('woff2');
+      font-weight: 600; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-700.woff2') format('woff2');
+      font-weight: 700; font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1B3A5C; --navy-dark: #0F2340;
+      --teal: #2A9D8F; --teal-light: #E8F5F4;
+      --grey-bg: #F5F7FA; --grey-border: #DDE3EC;
+      --text: #1A1A2E; --text-muted: #6B7A99; --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; font-size: 16px; color: var(--text); background: var(--grey-bg); line-height: 1.6; }
+
+    header { background: var(--navy); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-icon { width: 42px; height: 42px; border-radius: 6px; object-fit: cover; }
+    .logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; }
+    nav { display: flex; gap: 6px; }
+    nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: background 0.2s; }
+    nav a:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+    nav a.cta { background: var(--teal); color: var(--white); margin-left: 8px; }
+    @media (max-width: 700px) { nav { display: none; } }
+
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #2A4A73 100%); color: var(--white); padding: 56px 24px 48px; text-align: center; }
+    .hero-eyebrow { display: inline-block; background: rgba(42,157,143,0.25); border: 1px solid rgba(42,157,143,0.5); color: #7FDED5; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 999px; margin-bottom: 20px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .hero p { opacity: 0.85; max-width: 560px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
+
+    .content { max-width: 860px; margin: 56px auto 80px; padding: 0 clamp(1rem, 4vw, 3rem); }
+
+    /* Hoe werkt het stappen */
+    .uitleg-stappen { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+    .uitleg-stap { display: flex; gap: 24px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid var(--grey-border); }
+    .uitleg-stap:last-child { border-bottom: none; }
+    .stap-nr { width: 48px; height: 48px; border-radius: 50%; background: var(--navy); color: var(--white); font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .stap-body h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .stap-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* Netwerken uitleg */
+    .sectie-kop { font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .sectie-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
+
+    .netwerk-kaarten { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 48px; }
+    .netwerk-kaart { background: var(--white); border: 1px solid var(--grey-border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .netwerk-kaart.actief { border-color: var(--teal); }
+    .netwerk-kaart .netwerk-naam { font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+    .netwerk-kaart .netwerk-focus { font-size: 0.78rem; color: var(--teal); font-weight: 600; }
+    .netwerk-kaart .netwerk-omschrijving { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+    .badge-actief { display: inline-block; background: var(--teal-light); color: var(--teal); font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+    .badge-binnenkort { display: inline-block; background: var(--grey-bg); color: var(--text-muted); font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+    .netwerk-knop { display: inline-flex; align-items: center; gap: 6px; background: var(--teal); color: white; font-size: 0.85rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; text-decoration: none; margin-top: 4px; transition: background 0.2s; }
+    .netwerk-knop:hover { background: #238a7e; }
+    .netwerk-knop.disabled { background: var(--grey-border); color: var(--text-muted); pointer-events: none; }
+
+    /* Tiers */
+    .tiers { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 48px; }
+    .tier-kaart { background: var(--white); border: 1px solid var(--grey-border); border-radius: 14px; padding: 24px; }
+    .tier-naam { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .tier-prijs { font-size: 1.4rem; font-weight: 700; color: var(--teal); margin-bottom: 4px; }
+    .tier-prijs span { font-size: 0.78rem; font-weight: 400; color: var(--text-muted); }
+    .tier-lijst { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .tier-lijst li { font-size: 0.83rem; color: var(--text-muted); display: flex; gap: 8px; align-items: flex-start; }
+    .tier-lijst li::before { content: "✓"; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+
+    /* CTA blok */
+    .cta-blok { background: linear-gradient(135deg, var(--navy) 0%, #2A4A73 100%); border-radius: 16px; padding: 36px; color: var(--white); text-align: center; }
+    .cta-blok h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+    .cta-blok p { opacity: 0.8; font-size: 0.95rem; margin-bottom: 24px; line-height: 1.6; }
+    .cta-knoppen { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta { background: var(--teal); color: white; padding: 12px 24px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+    .btn-cta:hover { background: #238a7e; }
+    .btn-outline { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-outline:hover { border-color: white; color: white; }
+
+    .divider { border: none; border-top: 1px solid var(--grey-border); margin: 48px 0; }
+
+    footer { background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 32px 24px; font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img class="logo-icon" src="BKN_Logo.png" alt="Beenklachten Netwerk Logo" />
+      <div class="logo-text">Beenklachten Netwerk</div>
+    </a>
+    <nav>
+      <a href="index.html#klachten">Klachten</a>
+      <a href="index.html#therapeuten">Therapeuten</a>
+      <a href="aanmelden.html" class="cta">Praktijk aanmelden</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Voor fysiotherapeuten & praktijken</div>
+  <h1>Aanmelden bij het netwerk</h1>
+  <p>Vergroot uw zichtbaarheid en word gevonden door patiënten met been-, knie-, heup- en voetklachten in uw regio.</p>
+</div>
+
+<div class="content">
+
+  <!-- HOE WERKT HET -->
+  <div class="sectie-kop">Hoe werkt het?</div>
+  <div class="sectie-sub">Het Beenklachten Netwerk bestaat uit meerdere specialistische subsites. Aanmelden doet u via de subsite die het beste bij uw specialisatie past.</div>
+
+  <div class="uitleg-stappen">
+    <div class="uitleg-stap">
+      <div class="stap-nr">1</div>
+      <div class="stap-body">
+        <h3>Kies de juiste subsite</h3>
+        <p>Het netwerk is opgebouwd uit specialistische platforms per klachtengebied: enkelvoet.net voor enkel- en voetklachten, knieonderbeen.net voor knie- en onderbeen­klachten (binnenkort), en heupbovenbeen.net voor heup- en lies­klachten (binnenkort). Kies de subsite die past bij uw specialisatie.</p>
+      </div>
+    </div>
+    <div class="uitleg-stap">
+      <div class="stap-nr">2</div>
+      <div class="stap-body">
+        <h3>Meld uw praktijk aan</h3>
+        <p>Via de subsite meldt u uw praktijk aan. Na goedkeuring ontvangt u een unieke praktijkcode. Uw praktijk wordt zichtbaar op de kaart en in de zoekresultaten.</p>
+      </div>
+    </div>
+    <div class="uitleg-stap">
+      <div class="stap-nr">3</div>
+      <div class="stap-body">
+        <h3>Therapeuten koppelen</h3>
+        <p>Deel de praktijkcode met uw collega's. Therapeuten melden zich individueel aan via de subsite en worden automatisch aan uw praktijk gekoppeld. Na goedkeuring zijn zij direct zichtbaar.</p>
+      </div>
+    </div>
+    <div class="uitleg-stap">
+      <div class="stap-nr">4</div>
+      <div class="stap-body">
+        <h3>Zichtbaar op beenklachten.net én de subsite</h3>
+        <p>Aangemelde therapeuten en praktijken verschijnen automatisch op beenklachten.net én op de bijbehorende subsite. Zo bereikt u patiënten die breed zoeken én patiënten die gericht zoeken op een specifieke klacht.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- NETWERKEN -->
+  <div class="sectie-kop">Kies uw netwerk</div>
+  <div class="sectie-sub">Meld u aan via de subsite die past bij uw klachtengebied. Bent u in meerdere gebieden gespecialiseerd? Meld u dan aan bij meerdere netwerken.</div>
+
+  <div class="netwerk-kaarten">
+    <div class="netwerk-kaart actief">
+      <div class="netwerk-naam">Enkel Voet Netwerk</div>
+      <div class="netwerk-focus">Enkel & voet</div>
+      <span class="badge-actief">✓ Actief</span>
+      <div class="netwerk-omschrijving">Enkelverzwikking, hielspoor, achillespees, instabiele enkel, voetklachten. Inclusief cursusplatform voor specialisatie.</div>
+      <a class="netwerk-knop" href="https://enkelvoet.net/locatie-worden.html" target="_blank">Aanmelden als praktijk →</a>
+    </div>
+    <div class="netwerk-kaart">
+      <div class="netwerk-naam">Knie Onderbeen Netwerk</div>
+      <div class="netwerk-focus">Knie & onderbeen</div>
+      <span class="badge-binnenkort">Binnenkort</span>
+      <div class="netwerk-omschrijving">Kniepijn, meniscus, kruisband, knieartrose, knieschijfklachten. Platform in ontwikkeling.</div>
+      <a class="netwerk-knop disabled" href="#">Binnenkort beschikbaar</a>
+    </div>
+    <div class="netwerk-kaart">
+      <div class="netwerk-naam">Heup Bovenbeen Netwerk</div>
+      <div class="netwerk-focus">Heup, lies & bovenbeen</div>
+      <span class="badge-binnenkort">Binnenkort</span>
+      <div class="netwerk-omschrijving">Heuppijn, liesklachten, heupartrose, peesklachten rond het bovenbeen. Platform in ontwikkeling.</div>
+      <a class="netwerk-knop disabled" href="#">Binnenkort beschikbaar</a>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- PAKKETTEN -->
+  <div class="sectie-kop">Pakketten</div>
+  <div class="sectie-sub">Per subsite kiest u een pakket dat past bij uw praktijk. De pakketten gelden per subsite waar u zich aanmeldt.</div>
+
+  <div class="tiers">
+    <div class="tier-kaart">
+      <div class="tier-naam">Basis</div>
+      <div class="tier-prijs">Gratis <span>/ maand</span></div>
+      <ul class="tier-lijst">
+        <li>Vermelding op de kaart</li>
+        <li>Naam en adres zichtbaar</li>
+        <li>Koppeling therapeuten</li>
+      </ul>
+    </div>
+    <div class="tier-kaart" style="border-color:var(--teal)">
+      <div class="tier-naam">Plus</div>
+      <div class="tier-prijs">€ 29 <span>/ maand</span></div>
+      <ul class="tier-lijst">
+        <li>Alles uit Basis</li>
+        <li>Praktijkbeschrijving</li>
+        <li>Directe contactknop</li>
+        <li>Hogere zichtbaarheid</li>
+      </ul>
+    </div>
+    <div class="tier-kaart">
+      <div class="tier-naam">Partner</div>
+      <div class="tier-prijs">€ 59 <span>/ maand</span></div>
+      <ul class="tier-lijst">
+        <li>Alles uit Plus</li>
+        <li>Logo op de site</li>
+        <li>Uitgelichte positie</li>
+        <li>Toegang cursusplatform</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- CTA -->
+  <div class="cta-blok">
+    <h2>Klaar om aan te sluiten?</h2>
+    <p>Start vandaag bij het Enkel Voet Netwerk — het eerste actieve netwerk binnen beenklachten.net. Knie- en heupnetwerken volgen binnenkort.</p>
+    <div class="cta-knoppen">
+      <a class="btn-cta" href="https://enkelvoet.net/locatie-worden.html" target="_blank">Praktijk aanmelden bij EVN →</a>
+      <a class="btn-outline" href="mailto:info@beenklachten.net">Vraag stellen per e-mail</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#klachten">Klachten</a>
+    <a href="index.html#therapeuten">Therapeuten</a>
+    <a href="privacy.html">Privacyverklaring</a>
+  </div>
+  <p>© 2025 Beenklachten Netwerk &nbsp;·&nbsp; info@beenklachten.net</p>
+</footer>
+
+</body>
+</html>
