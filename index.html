@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beenklachten Netwerk – Vind een fysiotherapeut voor heup, knie, enkel en voet</title>
+  <meta name="description" content="Beenklachten.net verbindt u met gespecialiseerde fysiotherapeuten voor heup-, knie-, enkel- en voetklachten in uw regio." />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-300.woff2') format('woff2');
+      font-weight: 300;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-500.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-600.woff2') format('woff2');
+      font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/inter-v20-latin-700.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1B3A5C;
+      --navy-dark: #0F2340;
+      --teal: #2A9D8F;
+      --teal-light: #E8F5F4;
+      --grey-bg: #F5F7FA;
+      --grey-border: #DDE3EC;
+      --text: #1A1A2E;
+      --text-muted: #6B7A99;
+      --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; font-size: 16px; color: var(--text); background: var(--grey-bg); line-height: 1.6; }
+
+    /* ── HEADER ── */
+    header { background: var(--navy); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-icon { width: 42px; height: 42px; border-radius: 6px; object-fit: cover; }
+    .logo-text { color: var(--white); font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
+    nav { display: flex; gap: 6px; }
+    nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: background 0.2s; }
+    nav a:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+    nav a.cta { background: var(--teal); color: var(--white); margin-left: 8px; }
+    nav a.cta:hover { background: #238a7e; }
+    @media (max-width: 700px) { nav { display: none; } }
+
+    /* ── HERO ── */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #2A4A73 100%); color: var(--white); padding: 64px 24px 56px; text-align: center; }
+    .hero-eyebrow { display: inline-block; background: rgba(42,157,143,0.25); border: 1px solid rgba(42,157,143,0.5); color: #7FDED5; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 999px; margin-bottom: 20px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em; line-height: 1.2; }
+    .hero h1 em { font-style: normal; color: #7FDED5; }
+    .hero p { opacity: 0.85; max-width: 580px; margin: 0 auto 36px; font-size: 1rem; line-height: 1.7; }
+
+    /* ── ZOEKBALK ── */
+    .zoek-wrap { max-width: 640px; margin: 0 auto; }
+    .zoek-rij { display: flex; gap: 10px; flex-wrap: wrap; }
+    .zoek-input-wrap { flex: 1; min-width: 200px; position: relative; }
+    .zoek-input-wrap input { width: 100%; padding: 14px 20px; border: none; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text); outline: none; }
+    .zoek-select { padding: 14px 16px; border: none; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--text); outline: none; background: var(--white); min-width: 180px; }
+    .zoek-btn { padding: 14px 24px; background: var(--teal); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: background 0.2s; white-space: nowrap; }
+    .zoek-btn:hover { background: #238a7e; }
+
+    /* ── SUBCATEGORIE TEGELS ── */
+    .sectie { max-width: 1200px; margin: 56px auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+    .sectie-titel { font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .sectie-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 32px; }
+    .tegels { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .tegel { background: var(--white); border: 1px solid var(--grey-border); border-radius: 16px; padding: 28px; transition: all 0.2s; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px; cursor: pointer; }
+    .tegel:hover { box-shadow: 0 8px 32px rgba(27,58,92,0.12); border-color: var(--teal); transform: translateY(-2px); }
+    .tegel-icon { font-size: 2rem; }
+    .tegel-naam { font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .tegel-sub { font-size: 0.82rem; color: var(--teal); font-weight: 600; margin-top: -4px; }
+    .tegel-beschrijving { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+    .tegel-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag { background: var(--teal-light); color: var(--teal); font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
+    .tegel-link { font-size: 0.82rem; font-weight: 600; color: var(--teal); margin-top: auto; display: flex; align-items: center; gap: 4px; }
+
+    /* ── THERAPEUTEN ── */
+    .therapeuten-sectie { background: var(--white); border-top: 1px solid var(--grey-border); padding: 56px 0; }
+    .therapeuten-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+    .resultaat-info { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+    .therapeuten-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .therapeut-kaart { background: var(--grey-bg); border: 1px solid var(--grey-border); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: box-shadow 0.2s; }
+    .therapeut-kaart:hover { box-shadow: 0 4px 20px rgba(27,58,92,0.10); }
+    .therapeut-header { display: flex; gap: 14px; align-items: center; }
+    .therapeut-foto { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--teal-light); flex-shrink: 0; }
+    .therapeut-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .therapeut-naam { font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+    .therapeut-praktijk { font-size: 0.82rem; color: var(--text-muted); }
+    .therapeut-stad { font-size: 0.82rem; color: var(--teal); font-weight: 600; }
+    .therapeut-bio { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .therapeut-disciplines { display: flex; flex-wrap: wrap; gap: 4px; }
+    .disc-tag { background: var(--teal-light); color: var(--teal); font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+    .specialist-badge { background: #FEF9E7; color: #C9940A; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+    .laden { text-align: center; padding: 48px; color: var(--text-muted); }
+    .laden-spinner { font-size: 2rem; margin-bottom: 12px; animation: spin 1s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .geen-resultaten { text-align: center; padding: 48px; color: var(--text-muted); }
+
+    /* ── HOE WERKT HET ── */
+    .hoe-sectie { background: linear-gradient(135deg, var(--navy) 0%, #2A4A73 100%); color: var(--white); padding: 56px 0; }
+    .hoe-inner { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+    .hoe-inner h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .hoe-inner > p { opacity: 0.8; margin-bottom: 36px; font-size: 0.95rem; }
+    .hoe-stappen { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .hoe-stap { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 24px; }
+    .hoe-nr { font-size: 2rem; font-weight: 700; color: #7FDED5; margin-bottom: 8px; }
+    .hoe-stap h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+    .hoe-stap p { font-size: 0.85rem; opacity: 0.75; line-height: 1.6; }
+
+    /* ── SUBSITES ── */
+    .subsites-sectie { max-width: 1200px; margin: 56px auto; padding: 0 clamp(1rem, 4vw, 3rem); }
+    .subsites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
+    .subsite-kaart { background: var(--white); border: 1px solid var(--grey-border); border-radius: 12px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; transition: all 0.2s; }
+    .subsite-kaart:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(27,58,92,0.08); }
+    .subsite-naam { font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+    .subsite-focus { font-size: 0.82rem; color: var(--teal); font-weight: 600; }
+    .subsite-omschrijving { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    .subsite-pijl { font-size: 0.82rem; color: var(--teal); font-weight: 600; margin-top: 4px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 32px 24px; font-size: 0.82rem; }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img class="logo-icon" src="BKN_Logo.png" alt="Beenklachten Netwerk Logo" />
+      <div class="logo-text">Beenklachten Netwerk</div>
+    </a>
+    <nav>
+      <a href="#klachten">Klachten</a>
+      <a href="#therapeuten">Therapeuten</a>
+      <a href="aanmelden.html">Aanmelden</a>
+      <a href="aanmelden.html" class="cta">Praktijk aanmelden</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Heup · Knie · Enkel · Voet</div>
+  <h1>Vind een specialist voor<br><em>uw beenklachten</em></h1>
+  <p>Beenklachten.net verbindt u met fysiotherapeuten die gespecialiseerd zijn in heup-, knie-, enkel- en voetklachten. Zoek op klacht of locatie.</p>
+  <div class="zoek-wrap">
+    <div class="zoek-rij">
+      <div class="zoek-input-wrap">
+        <input type="text" id="zoek-stad" placeholder="Stad of postcode..." />
+      </div>
+      <select id="zoek-categorie" class="zoek-select">
+        <option value="">Alle klachten</option>
+        <option value="heup">Heup, lies & bovenbeen</option>
+        <option value="knie">Knie & onderbeen</option>
+        <option value="enkel">Enkel & voet</option>
+        <option value="artrose">Artroseprogramma's</option>
+        <option value="revalidatie">Revalidatie na operatie</option>
+        <option value="voorbereiding">Voorbereiding op operatie</option>
+        <option value="sport">Sport & overbelasting</option>
+      </select>
+      <button class="zoek-btn" onclick="zoekTherapeutenMetFilter()">🔍 Zoeken</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUBCATEGORIE TEGELS -->
+<div class="sectie" id="klachten">
+  <div class="sectie-titel">Waar heeft u last van?</div>
+  <div class="sectie-sub">Kies een klachtengebied voor meer informatie en gespecialiseerde therapeuten.</div>
+  <div class="tegels">
+
+    <a class="tegel" href="https://enkelvoet.net" target="_blank">
+      <div class="tegel-icon">🦵</div>
+      <div class="tegel-naam">Heup, lies & bovenbeen</div>
+      <div class="tegel-sub">heupbovenbeen.net</div>
+      <div class="tegel-beschrijving">Heuppijn, liesklachten, heupartrose, pees­problemen rond het bovenbeen. Van impingement tot artrose — gespecialiseerde begeleiding bij alle heupklachten.</div>
+      <div class="tegel-tags">
+        <span class="tag">Heuppijn</span>
+        <span class="tag">Heupartrose</span>
+        <span class="tag">Liesklachten</span>
+        <span class="tag">GLA:D</span>
+      </div>
+      <div class="tegel-link">Bekijk specialisten →</div>
+    </a>
+
+    <a class="tegel" href="https://enkelvoet.net" target="_blank">
+      <div class="tegel-icon">🦿</div>
+      <div class="tegel-naam">Knie & onderbeen</div>
+      <div class="tegel-sub">knieonderbeen.net</div>
+      <div class="tegel-beschrijving">Kniepijn, meniscusklachten, kruisbandletsel, knieartrose en knieschijfproblemen. Gespecialiseerde therapeuten voor herstel en terugkeer naar sport.</div>
+      <div class="tegel-tags">
+        <span class="tag">Kniepijn</span>
+        <span class="tag">Meniscus</span>
+        <span class="tag">Kruisband</span>
+        <span class="tag">Knieartrose</span>
+      </div>
+      <div class="tegel-link">Bekijk specialisten →</div>
+    </a>
+
+    <a class="tegel" href="https://enkelvoet.net" target="_blank">
+      <div class="tegel-icon">🦶</div>
+      <div class="tegel-naam">Enkel & voet</div>
+      <div class="tegel-sub">enkelvoet.net</div>
+      <div class="tegel-beschrijving">Enkelverzwikking, hielspoor, achillespeesklachten, instabiele enkel en voetpijn. Behandelprotocollen en specialisten in de regio Breda.</div>
+      <div class="tegel-tags">
+        <span class="tag">Enkelverzwikking</span>
+        <span class="tag">Hielspoor</span>
+        <span class="tag">Achillespees</span>
+        <span class="tag">Voetpijn</span>
+      </div>
+      <div class="tegel-link">Bekijk specialisten →</div>
+    </a>
+
+    <div class="tegel" onclick="filterCategorie('artrose')">
+      <div class="tegel-icon">🔵</div>
+      <div class="tegel-naam">Artroseprogramma's</div>
+      <div class="tegel-sub">GLA:D & beweegprogramma's</div>
+      <div class="tegel-beschrijving">Wetenschappelijk onderbouwde programma's voor knie- en heupartrose. GLA:D, oefentherapie en begeleiding bij langdurige gewrichtsklachten.</div>
+      <div class="tegel-tags">
+        <span class="tag">GLA:D</span>
+        <span class="tag">Knieartrose</span>
+        <span class="tag">Heupartrose</span>
+      </div>
+      <div class="tegel-link">Zoek therapeuten →</div>
+    </div>
+
+    <div class="tegel" onclick="filterCategorie('revalidatie')">
+      <div class="tegel-icon">🏥</div>
+      <div class="tegel-naam">Revalidatie na operatie</div>
+      <div class="tegel-sub">Nieuwe heup, nieuwe knie, kruisband</div>
+      <div class="tegel-beschrijving">Herstel na een heup- of knieprothese, kruisbandoperatie of andere orthopedische ingreep. Gespecialiseerde begeleiding van het eerste herstel tot volledige terugkeer.</div>
+      <div class="tegel-tags">
+        <span class="tag">Nieuwe heup</span>
+        <span class="tag">Nieuwe knie</span>
+        <span class="tag">Kruisband</span>
+      </div>
+      <div class="tegel-link">Zoek therapeuten →</div>
+    </div>
+
+    <div class="tegel" onclick="filterCategorie('voorbereiding')">
+      <div class="tegel-icon">💪</div>
+      <div class="tegel-naam">Voorbereiding op operatie</div>
+      <div class="tegel-sub">Prehabilitatie</div>
+      <div class="tegel-beschrijving">Sterker de operatiekamer in. Prehabilitatie verbetert aantoonbaar het herstel na een heup- of knieoperatie. Begin op tijd met gerichte training.</div>
+      <div class="tegel-tags">
+        <span class="tag">Prehabilitatie</span>
+        <span class="tag">Kracht</span>
+        <span class="tag">Conditie</span>
+      </div>
+      <div class="tegel-link">Zoek therapeuten →</div>
+    </div>
+
+    <div class="tegel" onclick="filterCategorie('sport')">
+      <div class="tegel-icon">🏃</div>
+      <div class="tegel-naam">Sport, bewegen & overbelasting</div>
+      <div class="tegel-sub">Hardlopen, fietsen, voetbal & meer</div>
+      <div class="tegel-beschrijving">Hardloopblessures, knieklachten bij sport, achillespeesklachten, liesklachten. Sportgerichte therapeuten die begrijpen wat terugkeer naar sport vraagt.</div>
+      <div class="tegel-tags">
+        <span class="tag">Hardlopen</span>
+        <span class="tag">Sportblessure</span>
+        <span class="tag">Overbelasting</span>
+      </div>
+      <div class="tegel-link">Zoek therapeuten →</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- THERAPEUTEN -->
+<div class="therapeuten-sectie" id="therapeuten">
+  <div class="therapeuten-inner">
+    <div class="sectie-titel">Gespecialiseerde therapeuten</div>
+    <div class="sectie-sub" style="margin-bottom:24px">Alle therapeuten aangesloten bij het Beenklachten Netwerk.</div>
+    <div class="resultaat-info" id="resultaat-info"></div>
+    <div id="therapeuten-grid" class="therapeuten-grid">
+      <div class="laden"><div class="laden-spinner">⟳</div><div>Therapeuten laden...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOE WERKT HET -->
+<div class="hoe-sectie">
+  <div class="hoe-inner">
+    <h2>Hoe werkt het Beenklachten Netwerk?</h2>
+    <p>Gespecialiseerde zorg via een netwerk van vakkundige fysiotherapeuten.</p>
+    <div class="hoe-stappen">
+      <div class="hoe-stap">
+        <div class="hoe-nr">01</div>
+        <h3>Kies uw klacht</h3>
+        <p>Selecteer het klachtengebied dat past bij uw situatie — van heup tot voet.</p>
+      </div>
+      <div class="hoe-stap">
+        <div class="hoe-nr">02</div>
+        <h3>Vind een specialist</h3>
+        <p>Zoek op stad of postcode en vind een gespecialiseerde therapeut bij u in de buurt.</p>
+      </div>
+      <div class="hoe-stap">
+        <div class="hoe-nr">03</div>
+        <h3>Maak een afspraak</h3>
+        <p>Neem direct contact op met de therapeut of praktijk van uw keuze.</p>
+      </div>
+      <div class="hoe-stap">
+        <div class="hoe-nr">04</div>
+        <h3>Herstel gericht</h3>
+        <p>Gespecialiseerde begeleiding op basis van actuele behandelprotocollen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBSITES -->
+<div class="subsites-sectie">
+  <div class="sectie-titel">Specialistische netwerken</div>
+  <div class="sectie-sub">Elk klachtengebied heeft een eigen platform met diepgaande informatie en gespecialiseerde therapeuten.</div>
+  <div class="subsites-grid">
+    <a class="subsite-kaart" href="https://enkelvoet.net" target="_blank">
+      <div class="subsite-naam">Enkel Voet Netwerk</div>
+      <div class="subsite-focus">Enkel & voet</div>
+      <div class="subsite-omschrijving">Behandelprotocollen, gespecialiseerde therapeuten en cursussen voor enkel- en voetklachten in de regio Breda.</div>
+      <div class="subsite-pijl">Ga naar enkelvoet.net →</div>
+    </a>
+    <a class="subsite-kaart" href="#" target="_blank" style="opacity:0.6">
+      <div class="subsite-naam">Knie Onderbeen Netwerk</div>
+      <div class="subsite-focus">Knie & onderbeen — binnenkort</div>
+      <div class="subsite-omschrijving">Gespecialiseerd platform voor knie- en onderbeen­klachten. Binnenkort beschikbaar.</div>
+      <div class="subsite-pijl">knieonderbeen.net →</div>
+    </a>
+    <a class="subsite-kaart" href="#" target="_blank" style="opacity:0.6">
+      <div class="subsite-naam">Heup Bovenbeen Netwerk</div>
+      <div class="subsite-focus">Heup & bovenbeen — binnenkort</div>
+      <div class="subsite-omschrijving">Gespecialiseerd platform voor heup-, lies- en bovenbeen­klachten. Binnenkort beschikbaar.</div>
+      <div class="subsite-pijl">heupbovenbeen.net →</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="#klachten">Klachten</a>
+    <a href="#therapeuten">Therapeuten</a>
+    <a href="aanmelden.html">Aanmelden</a>
+    <a href="privacy.html">Privacyverklaring</a>
+  </div>
+  <p>© 2025 Beenklachten Netwerk &nbsp;·&nbsp; info@beenklachten.net</p>
+</footer>
+
+<script>
+const SUPABASE_URL = 'https://islujznszevdynguhjdc.supabase.co';
+const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzbHVqem5zemV2ZHluZ3VoamRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NDYzMDAsImV4cCI6MjA5NzIyMjMwMH0.wh3RXZRKfpfArr3YBYu8ktE7xv1inwDD72Vq3LJl3QQ';
+const HEADERS = { 'apikey': ANON_KEY, 'Authorization': `Bearer ${ANON_KEY}` };
+
+let allTherapeutenData = [];
+
+async function laadTherapeutenMetPraktijken() {
+  try {
+    // Haal therapeuten op met praktijkinfo
+    const resp = await fetch(
+      `${SUPABASE_URL}/rest/v1/therapeuten?actief=eq.true&select=id,voornaam,achternaam,foto_url,bio,disciplines,code,praktijk_id,praktijken(naam,stad,straat)`,
+      { headers: HEADERS }
+    );
+    const therapeuten = await resp.json();
+
+    // Check specialisten via cursus_voortgang
+    const codes = therapeuten.map(t => t.code).filter(Boolean);
+    let specialisten = new Set();
+    if (codes.length > 0) {
+      const codeFilter = codes.map(c => `therapeut_code.eq.${c}`).join(',');
+      const vResp = await fetch(
+        `${SUPABASE_URL}/rest/v1/cursus_voortgang?or=(${codeFilter})&geslaagd=eq.true&select=therapeut_code`,
+        { headers: HEADERS }
+      );
+      const voortgang = await vResp.json();
+      (voortgang || []).forEach(v => specialisten.add(v.therapeut_code));
+    }
+
+    allTherapeutenData = therapeuten.map(t => ({
+      ...t,
+      isSpecialist: specialisten.has(t.code)
+    }));
+
+    renderTherapeutenLijst(allTherapeutenData);
+  } catch(e) {
+    document.getElementById('therapeuten-grid').innerHTML =
+      '<div class="geen-resultaten">Kon therapeuten niet laden. Probeer het later opnieuw.</div>';
+  }
+}
+
+function renderTherapeutenLijst(lijst) {
+  const grid = document.getElementById('therapeuten-grid');
+  const info = document.getElementById('resultaat-info');
+
+  if (!lijst || lijst.length === 0) {
+    grid.innerHTML = '<div class="geen-resultaten">Geen therapeuten gevonden voor deze zoekopdracht.</div>';
+    info.textContent = '';
+    return;
+  }
+
+  info.textContent = `${lijst.length} therapeut${lijst.length !== 1 ? 'en' : ''} gevonden`;
+
+  grid.innerHTML = lijst.map(t => {
+    const naam = `${t.voornaam} ${t.achternaam}`;
+    const praktijkNaam = t.praktijken?.naam || '';
+    const stad = t.praktijken?.stad || '';
+    const fotoHtml = t.foto_url
+      ? `<img class="therapeut-foto" src="${t.foto_url}" alt="${naam}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="therapeut-avatar" style="display:none">👤</div>`
+      : `<div class="therapeut-avatar">👤</div>`;
+    const disciplines = (t.disciplines || []).map(d => `<span class="disc-tag">${d}</span>`).join('');
+    const specialistBadge = t.isSpecialist ? '<span class="specialist-badge">⭐ Specialist</span>' : '';
+
+    return `
+      <div class="therapeut-kaart">
+        <div class="therapeut-header">
+          ${fotoHtml}
+          <div>
+            <div class="therapeut-naam">${naam}</div>
+            <div class="therapeut-praktijk">${praktijkNaam}</div>
+            <div class="therapeut-stad">📍 ${stad}</div>
+          </div>
+        </div>
+        ${t.bio ? `<div class="therapeut-bio">${t.bio}</div>` : ''}
+        <div class="therapeut-disciplines">${disciplines}${specialistBadge}</div>
+      </div>`;
+  }).join('');
+}
+
+function zoekTherapeutenMetFilter() {
+  const stad = document.getElementById('zoek-stad').value.trim().toLowerCase();
+  const categorie = document.getElementById('zoek-categorie').value;
+
+  let gefilterd = [...allTherapeutenData];
+
+  if (stad) {
+    gefilterd = gefilterd.filter(t => {
+      const therapeutStad = (t.praktijken?.stad || '').toLowerCase();
+      const therapeutStraat = (t.praktijken?.straat || '').toLowerCase();
+      return therapeutStad.includes(stad) || therapeutStraat.includes(stad);
+    });
+  }
+
+  // Scroll naar therapeuten sectie
+  document.getElementById('therapeuten').scrollIntoView({ behavior: 'smooth' });
+  renderTherapeutenLijst(gefilterd);
+}
+
+function filterCategorie(cat) {
+  document.getElementById('zoek-categorie').value = cat;
+  document.getElementById('therapeuten').scrollIntoView({ behavior: 'smooth' });
+  zoekTherapeutenMetFilter();
+}
+
+// Enter-toets in zoekbalk
+document.getElementById('zoek-stad').addEventListener('keydown', e => {
+  if (e.key === 'Enter') zoekTherapeutenMetFilter();
+});
+
+// Laad bij start
+laadTherapeutenMetPraktijken();
+</script>
+</body>
+</html>
