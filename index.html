@@ -381,7 +381,7 @@ async function laadTherapeutenMetPraktijken() {
   try {
     // Haal therapeuten op met praktijkinfo
     const resp = await fetch(
-      `${SUPABASE_URL}/rest/v1/therapeuten?actief=eq.true&select=id,voornaam,achternaam,foto_url,bio,disciplines,code,praktijk_id,praktijken(naam,stad,straat)`,
+      `${SUPABASE_URL}/rest/v1/therapeuten?actief=eq.true&select=id,voornaam,achternaam,foto_url,bio,disciplines,code,praktijk_id,praktijken(naam,stad,straat,postcode)`,
       { headers: HEADERS }
     );
     const therapeuten = await resp.json();
@@ -449,21 +449,46 @@ function renderTherapeutenLijst(lijst) {
   }).join('');
 }
 
+// Mapping categorie dropdown naar discipline/zoektermen
+const CATEGORIE_TERMEN = {
+  heup: ['heup', 'lies', 'bovenbeen', 'heupartrose', 'glad'],
+  knie: ['knie', 'onderbeen', 'meniscus', 'kruisband', 'knieartrose'],
+  enkel: ['enkel', 'voet', 'hielspoor', 'achillespees'],
+  artrose: ['artrose', 'glad', 'gewricht'],
+  revalidatie: ['revalidatie', 'operatie', 'prothese', 'herstel'],
+  voorbereiding: ['prehabilitatie', 'voorbereiding', 'operatie'],
+  sport: ['sport', 'hardlopen', 'blessure', 'overbelasting']
+};
+
 function zoekTherapeutenMetFilter() {
-  const stad = document.getElementById('zoek-stad').value.trim().toLowerCase();
+  const zoekterm = document.getElementById('zoek-stad').value.trim().toLowerCase();
   const categorie = document.getElementById('zoek-categorie').value;
 
   let gefilterd = [...allTherapeutenData];
 
-  if (stad) {
+  // Filter op stad/postcode
+  if (zoekterm) {
     gefilterd = gefilterd.filter(t => {
       const therapeutStad = (t.praktijken?.stad || '').toLowerCase();
       const therapeutStraat = (t.praktijken?.straat || '').toLowerCase();
-      return therapeutStad.includes(stad) || therapeutStraat.includes(stad);
+      const therapeutPostcode = (t.praktijken?.postcode || '').toLowerCase().replace(/\s/g, '');
+      const zoekSchoon = zoekterm.replace(/\s/g, '');
+      return therapeutStad.includes(zoekterm)
+        || therapeutStraat.includes(zoekterm)
+        || therapeutPostcode.includes(zoekSchoon);
     });
   }
 
-  // Scroll naar therapeuten sectie
+  // Filter op categorie via disciplines
+  if (categorie && CATEGORIE_TERMEN[categorie]) {
+    const termen = CATEGORIE_TERMEN[categorie];
+    gefilterd = gefilterd.filter(t => {
+      const disciplines = (t.disciplines || []).map(d => d.toLowerCase()).join(' ');
+      const bio = (t.bio || '').toLowerCase();
+      return termen.some(term => disciplines.includes(term) || bio.includes(term));
+    });
+  }
+
   document.getElementById('therapeuten').scrollIntoView({ behavior: 'smooth' });
   renderTherapeutenLijst(gefilterd);
 }
