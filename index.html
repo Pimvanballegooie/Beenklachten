@@ -173,15 +173,18 @@
       <div class="zoek-input-wrap">
         <input type="text" id="zoek-stad" placeholder="Stad of postcode..." />
       </div>
-      <select id="zoek-categorie" class="zoek-select">
+      <select id="zoek-categorie" class="zoek-select" onchange="updateZorgTypeDropdown()">
         <option value="">Alle klachten</option>
         <option value="heup">Heup, lies & bovenbeen</option>
         <option value="knie">Knie & onderbeen</option>
         <option value="enkel">Enkel & voet</option>
-        <option value="artrose">Artroseprogramma's</option>
+      </select>
+      <select id="zoek-zorgtype" class="zoek-select">
+        <option value="">Alle zorgtypen</option>
+        <option value="algemeen">Algemene klachten</option>
+        <option value="sport">Sport & overbelasting</option>
         <option value="revalidatie">Revalidatie na operatie</option>
         <option value="voorbereiding">Voorbereiding op operatie</option>
-        <option value="sport">Sport & overbelasting</option>
       </select>
       <button class="zoek-btn" onclick="zoekTherapeutenMetFilter()">🔍 Zoeken</button>
     </div>
@@ -449,20 +452,30 @@ function renderTherapeutenLijst(lijst) {
   }).join('');
 }
 
-// Mapping categorie dropdown naar subcategorie IDs
-const CATEGORIE_SUBCAT_IDS = {
+// Klachtengebied → subcategorie IDs
+const KLACHT_IDS = {
   heup: [43],
   knie: [44],
   enkel: [45],
-  artrose: [46],
+  artrose: [46]
+};
+
+// Zorgtype → subcategorie IDs
+const ZORGTYPE_IDS = {
   revalidatie: [47],
   voorbereiding: [48],
-  sport: [49]
+  sport: [49],
+  algemeen: [43, 44, 45, 46] // algemene klachten = alle klachtengebieden
 };
+
+function updateZorgTypeDropdown() {
+  // Zorgtype dropdown altijd zichtbaar — geen aanpassing nodig
+}
 
 async function zoekTherapeutenMetFilter() {
   const zoekterm = document.getElementById('zoek-stad').value.trim().toLowerCase();
   const categorie = document.getElementById('zoek-categorie').value;
+  const zorgtype = document.getElementById('zoek-zorgtype').value;
 
   let gefilterd = [...allTherapeutenData];
 
@@ -479,21 +492,39 @@ async function zoekTherapeutenMetFilter() {
     });
   }
 
-  // Filter op categorie via therapeut_subcategorieen
-  if (categorie && CATEGORIE_SUBCAT_IDS[categorie]) {
-    const subcatIds = CATEGORIE_SUBCAT_IDS[categorie];
+  // Filter op klachtengebied EN zorgtype via therapeut_subcategorieen
+  const subcatIds = [];
+  if (categorie && KLACHT_IDS[categorie]) subcatIds.push(...KLACHT_IDS[categorie]);
+  if (zorgtype && ZORGTYPE_IDS[zorgtype]) subcatIds.push(...ZORGTYPE_IDS[zorgtype]);
+
+  if (subcatIds.length > 0) {
     const therapeutIds = gefilterd.map(t => t.id);
     if (therapeutIds.length > 0) {
       try {
+        // Haal alle subcategorie koppelingen op voor deze therapeuten
         const idFilter = therapeutIds.map(id => `therapeut_id.eq.${id}`).join(',');
-        const subcatFilter = subcatIds.map(id => `subcategorie_id.eq.${id}`).join(',');
         const resp = await fetch(
-          `${SUPABASE_URL}/rest/v1/therapeut_subcategorieen?or=(${idFilter})&or=(${subcatFilter})&select=therapeut_id`,
+          `${SUPABASE_URL}/rest/v1/therapeut_subcategorieen?or=(${idFilter})&select=therapeut_id,subcategorie_id`,
           { headers: HEADERS }
         );
         const koppelingen = await resp.json();
-        const gekoppeldeIds = new Set(koppelingen.map(k => k.therapeut_id));
-        gefilterd = gefilterd.filter(t => gekoppeldeIds.has(t.id));
+
+        // Therapeut moet gekoppeld zijn aan ALLE gevraagde subcategorie-groepen
+        gefilterd = gefilterd.filter(t => {
+          const therapeutSubcats = koppelingen
+            .filter(k => k.therapeut_id === t.id)
+            .map(k => k.subcategorie_id);
+
+          // Check klachtengebied
+          if (categorie && KLACHT_IDS[categorie]) {
+            if (!KLACHT_IDS[categorie].some(id => therapeutSubcats.includes(id))) return false;
+          }
+          // Check zorgtype
+          if (zorgtype && ZORGTYPE_IDS[zorgtype] && zorgtype !== 'algemeen') {
+            if (!ZORGTYPE_IDS[zorgtype].some(id => therapeutSubcats.includes(id))) return false;
+          }
+          return true;
+        });
       } catch(e) {
         console.error('Fout bij laden subcategorie filter:', e);
       }
