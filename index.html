@@ -449,18 +449,18 @@ function renderTherapeutenLijst(lijst) {
   }).join('');
 }
 
-// Mapping categorie dropdown naar discipline/zoektermen
-const CATEGORIE_TERMEN = {
-  heup: ['heup', 'lies', 'bovenbeen', 'heupartrose', 'glad'],
-  knie: ['knie', 'onderbeen', 'meniscus', 'kruisband', 'knieartrose'],
-  enkel: ['enkel', 'voet', 'hielspoor', 'achillespees'],
-  artrose: ['artrose', 'glad', 'gewricht'],
-  revalidatie: ['revalidatie', 'operatie', 'prothese', 'herstel'],
-  voorbereiding: ['prehabilitatie', 'voorbereiding', 'operatie'],
-  sport: ['sport', 'hardlopen', 'blessure', 'overbelasting']
+// Mapping categorie dropdown naar subcategorie IDs
+const CATEGORIE_SUBCAT_IDS = {
+  heup: [43],
+  knie: [44],
+  enkel: [45],
+  artrose: [46],
+  revalidatie: [47],
+  voorbereiding: [48],
+  sport: [49]
 };
 
-function zoekTherapeutenMetFilter() {
+async function zoekTherapeutenMetFilter() {
   const zoekterm = document.getElementById('zoek-stad').value.trim().toLowerCase();
   const categorie = document.getElementById('zoek-categorie').value;
 
@@ -468,35 +468,46 @@ function zoekTherapeutenMetFilter() {
 
   // Filter op stad/postcode
   if (zoekterm) {
+    const zoekSchoon = zoekterm.replace(/\s/g, '');
     gefilterd = gefilterd.filter(t => {
       const therapeutStad = (t.praktijken?.stad || '').toLowerCase();
       const therapeutStraat = (t.praktijken?.straat || '').toLowerCase();
       const therapeutPostcode = (t.praktijken?.postcode || '').toLowerCase().replace(/\s/g, '');
-      const zoekSchoon = zoekterm.replace(/\s/g, '');
       return therapeutStad.includes(zoekterm)
         || therapeutStraat.includes(zoekterm)
         || therapeutPostcode.includes(zoekSchoon);
     });
   }
 
-  // Filter op categorie via disciplines
-  if (categorie && CATEGORIE_TERMEN[categorie]) {
-    const termen = CATEGORIE_TERMEN[categorie];
-    gefilterd = gefilterd.filter(t => {
-      const disciplines = (t.disciplines || []).map(d => d.toLowerCase()).join(' ');
-      const bio = (t.bio || '').toLowerCase();
-      return termen.some(term => disciplines.includes(term) || bio.includes(term));
-    });
+  // Filter op categorie via therapeut_subcategorieen
+  if (categorie && CATEGORIE_SUBCAT_IDS[categorie]) {
+    const subcatIds = CATEGORIE_SUBCAT_IDS[categorie];
+    const therapeutIds = gefilterd.map(t => t.id);
+    if (therapeutIds.length > 0) {
+      try {
+        const idFilter = therapeutIds.map(id => `therapeut_id.eq.${id}`).join(',');
+        const subcatFilter = subcatIds.map(id => `subcategorie_id.eq.${id}`).join(',');
+        const resp = await fetch(
+          `${SUPABASE_URL}/rest/v1/therapeut_subcategorieen?or=(${idFilter})&or=(${subcatFilter})&select=therapeut_id`,
+          { headers: HEADERS }
+        );
+        const koppelingen = await resp.json();
+        const gekoppeldeIds = new Set(koppelingen.map(k => k.therapeut_id));
+        gefilterd = gefilterd.filter(t => gekoppeldeIds.has(t.id));
+      } catch(e) {
+        console.error('Fout bij laden subcategorie filter:', e);
+      }
+    }
   }
 
   document.getElementById('therapeuten').scrollIntoView({ behavior: 'smooth' });
   renderTherapeutenLijst(gefilterd);
 }
 
-function filterCategorie(cat) {
+async function filterCategorie(cat) {
   document.getElementById('zoek-categorie').value = cat;
   document.getElementById('therapeuten').scrollIntoView({ behavior: 'smooth' });
-  zoekTherapeutenMetFilter();
+  await zoekTherapeutenMetFilter();
 }
 
 // Enter-toets in zoekbalk
