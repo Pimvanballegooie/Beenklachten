@@ -379,30 +379,30 @@ let allTherapeutenData = [];
 
 async function laadTherapeutenMetPraktijken() {
   try {
-    // Haal therapeuten op met praktijkinfo
-    const resp = await fetch(
-      `${SUPABASE_URL}/rest/v1/therapeuten?actief=eq.true&select=id,voornaam,achternaam,foto_url,bio,disciplines,code,praktijk_id,praktijken(naam,stad,straat,postcode)`,
-      { headers: HEADERS }
-    );
-    const therapeuten = await resp.json();
+    const [r1, r2, r3, r4] = await Promise.all([
+      fetch(`${SUPABASE_URL}/rest/v1/therapeuten?actief=eq.true&select=id,voornaam,achternaam,foto_url,bio,disciplines,code`, { headers: HEADERS }),
+      fetch(`${SUPABASE_URL}/rest/v1/praktijken?actief=eq.true&select=id,naam,straat,postcode,stad,website`, { headers: HEADERS }),
+      fetch(`${SUPABASE_URL}/rest/v1/therapeut_praktijken?select=therapeut_id,praktijk_id`, { headers: HEADERS }),
+      fetch(`${SUPABASE_URL}/rest/v1/cursus_voortgang?geslaagd=eq.true&select=therapeut_code`, { headers: HEADERS })
+    ]);
 
-    // Check specialisten via cursus_voortgang
-    const codes = therapeuten.map(t => t.code).filter(Boolean);
-    let specialisten = new Set();
-    if (codes.length > 0) {
-      const codeFilter = codes.map(c => `therapeut_code.eq.${c}`).join(',');
-      const vResp = await fetch(
-        `${SUPABASE_URL}/rest/v1/cursus_voortgang?or=(${codeFilter})&geslaagd=eq.true&select=therapeut_code`,
-        { headers: HEADERS }
-      );
-      const voortgang = await vResp.json();
-      (voortgang || []).forEach(v => specialisten.add(v.therapeut_code));
-    }
+    const therapeuten = await r1.json();
+    const praktijken = await r2.json();
+    const koppelingen = await r3.json();
+    const voortgang = await r4.json();
 
-    allTherapeutenData = therapeuten.map(t => ({
-      ...t,
-      isSpecialist: specialisten.has(t.code)
-    }));
+    const specialisten = new Set((voortgang || []).map(v => v.therapeut_code));
+
+    // Koppel praktijkinfo aan therapeuten via junction tabel
+    allTherapeutenData = therapeuten.map(t => {
+      const koppeling = koppelingen.find(k => k.therapeut_id === t.id);
+      const praktijk = koppeling ? praktijken.find(p => p.id === koppeling.praktijk_id) : null;
+      return {
+        ...t,
+        praktijken: praktijk || null,
+        isSpecialist: specialisten.has(t.code)
+      };
+    });
 
     renderTherapeutenLijst(allTherapeutenData);
   } catch(e) {
